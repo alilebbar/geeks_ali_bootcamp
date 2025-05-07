@@ -26,5 +26,5 @@ def main():
         print("Il fait chaud aujourd’hui ! Pense à bien t’hydrater.")
     else:
         print("Canicule ! Reste à l’ombre et bois beaucoup d’eau.")
-    
+  
 main()
