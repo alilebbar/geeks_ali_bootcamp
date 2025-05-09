@@ -61,6 +61,8 @@ print(p.get_visible_items())
 p.last_page()
 print(p.get_visible_items())
 # ['y', 'z']
+bool([])
+
 
 p.go_to_page(10)
 print(p.current_idx + 1)
