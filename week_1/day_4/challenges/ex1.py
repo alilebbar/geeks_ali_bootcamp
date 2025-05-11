@@ -52,15 +52,15 @@ p = Pagination(alphabetList, 4)
 print(str(p))
 
 print(p.get_visible_items())
-# ['a', 'b', 'c', 'd']
+
 
 p.next_page()
 print(p.get_visible_items())
-# ['e', 'f', 'g', 'h']
+
 
 p.last_page()
 print(p.get_visible_items())
-# ['y', 'z']
+
 bool([])
 
 
