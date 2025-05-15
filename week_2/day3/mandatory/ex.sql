@@ -37,8 +37,7 @@ delete from new_film where name = 'Harry Potter';
 SELECT * from new_film;
 SELECT * from customer_review;
 
-/*le rivew de Harry Potter est supprimé car le film a été supprimé de la table new_film et la contrainte on delete cascade a été activée.
-
+/*le rivew de Harry Potter est supprimé car le film a été supprimé de la table new_film
 
 /* exercice 2*/
 
