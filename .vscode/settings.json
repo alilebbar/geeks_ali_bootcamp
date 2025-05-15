@@ -29,6 +29,16 @@
             "database": "dvdrental",
             "username": "postgres",
             "password": "admin"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "librairie",
+            "database": "librairie",
+            "username": "postgres",
+            "password": "admin"
         }
     ]
 }
