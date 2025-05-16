@@ -39,6 +39,16 @@
             "database": "librairie",
             "username": "postgres",
             "password": "admin"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "restaurant",
+            "database": "restaurant",
+            "username": "postgres",
+            "password": "admin"
         }
     ]
 }
