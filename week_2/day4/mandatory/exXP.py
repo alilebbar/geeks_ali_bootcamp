@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-DB_NAME=restaurant
+
+'''DB_NAME=restaurant
 DB_USER=postgres
 DB_PASSWORD=admin
 DB_HOST=localhost
@@ -169,4 +169,4 @@ while i!=1:
     case _:
         print("choix invalide")
         choix=int(show_user_menu())
-
+'''

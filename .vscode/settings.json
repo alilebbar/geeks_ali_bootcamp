@@ -49,6 +49,16 @@
             "database": "restaurant",
             "username": "postgres",
             "password": "admin"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "mini_projet",
+            "database": "mini_projet",
+            "username": "postgres",
+            "password": "admin"
         }
     ]
 }
