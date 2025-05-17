@@ -1,27 +1,31 @@
-SELECT rating, COUNT(*) AS rating_count
-FROM film
-GROUP BY rating;
-
-SELECT title FROM film
-WHERE rating IN ('G', 'PG-13')
-  AND length < 120
-  AND rental_rate < 3.00
-ORDER BY title ASC;
+/*exercice 1 */
 
 
-SELECT * FROM customer;
+SELECT f.title
+FROM rental r
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+WHERE r.return_date IS NULL;
 
-UPDATE customer
-SET first_name = 'Ali', last_name = 'Lebbar', email = 'lbr.abdelali@gmail.com'
-WHERE customer_id = 1;
-
-UPDATE address
-SET address = '2mars', district = 'mersultan'
-WHERE address_id = 1;
+SELECT c.first_name, c.last_name, f.title
+FROM rental r
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+JOIN customer c ON r.customer_id = c.customer_id
+WHERE r.return_date IS NULL
+GROUP BY c.first_name, c.last_name, f.title
 
 
 
-/*day 3 */
+SELECT f.title
+FROM film f
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category c ON fc.category_id = c.category_id
+JOIN film_actor fa ON f.film_id = fa.film_id
+JOIN actor a ON fa.actor_id = a.actor_id
+WHERE c.name = 'Action' AND a.first_name = 'Joe' AND a.last_name = 'Swank';
+
+/*exercice 2 */
 
 SELECT f.title
 FROM rental r
@@ -61,5 +65,3 @@ JOIN film f ON i.film_id = f.film_id
 JOIN rental r ON i.inventory_id = r.inventory_id
 WHERE r.return_date IS NOT NULL
 GROUP BY s.store_id;
-
-
