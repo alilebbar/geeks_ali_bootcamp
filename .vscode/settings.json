@@ -59,6 +59,16 @@
             "database": "mini_projet",
             "username": "postgres",
             "password": "admin"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "students",
+            "database": "bootcamp",
+            "username": "postgres",
+            "password": "admin"
         }
     ]
 }
