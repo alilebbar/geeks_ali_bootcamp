@@ -25,3 +25,15 @@ INSERT INTO profile_person (person_id, username) VALUES
 SELECT * FROM person;
 SELECT * FROM profile_person;
 
+CREATE TABLE IF NOT EXISTS user_profil (
+    id SERIAL PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+
+
+INSERT INTO user_profil(user_name,password) VALUES 
+('admin','admin'),
+('user1','password1'),
+('user2','password2'),
+('user3','password3');
