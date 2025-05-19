@@ -1,7 +1,8 @@
 from getpass import getpass
-from psycopg2 import connect, sql
+from psycopg2 import connect
 from psycopg2.extras import RealDictCursor
-import os
+import bcrypt
+
 
 
 def get_db_connection():
@@ -15,34 +16,39 @@ def get_db_connection():
     return conn
 
 
-users = {}
+
 logged_in = None
 
 
 def login():
-   global logged_in
-    
-   try: 
-    username = input("Enter your username: ")
-    password = getpass("Enter your password: ")
-    conn = get_db_connection()
-    cur=conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT user_name,password FROM user_profil WHERE user_name = %s and password = %s", (username,password,))
-    result = cur.fetchone()
-    print(result)
-    if result is None:
-         print("❌ User not found.")
-    elif  result['password'] == password:
+    global logged_in
+
+    try: 
+        username = input("Enter your username: ").strip()
+        password = getpass("Enter your password: ")
+        hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute("SELECT user_name, password FROM user_profil WHERE user_name = %s", (username,))
+        result = cur.fetchone()
+        print(f"Hashed password: {hashed_pw}")
+        print(f"Result: {result['password']}")
+        if result is None:
+            print("❌ User not found.")
+        elif bcrypt.checkpw(password.encode('utf-8'), bytes(result['password'])):
             logged_in = username
             print(f"✅ Welcome, {logged_in}!")
-    else:
+        else:
             print("❌ Incorrect password.")
 
-   except Exception as e:
+    except Exception as e:
         print(f"❌ Error: {e}")
-   finally:
-        cur.close()
-        conn.close()
+    finally:
+        try:
+            cur.close()
+            conn.close()
+        except:
+            pass
 
 def signup():
     try:
@@ -51,18 +57,20 @@ def signup():
 
         while True:
             username = input("Choose a username: ")
-
             cur.execute("SELECT 1 FROM user_profil WHERE user_name = %s", (username,))
             if cur.fetchone():
-                print("❌ Username already exists. Try another one.")
+                print("❌ Username already exists.")
             else:
                 break
 
         password = getpass("Choose a password: ")
 
+        # Hasher le mot de passe
+        hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
         cur.execute(
             "INSERT INTO user_profil (user_name, password) VALUES (%s, %s)",
-            (username, password)
+            (username, hashed_pw)
         )
         conn.commit()
 

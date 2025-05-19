@@ -28,10 +28,13 @@ SELECT * FROM profile_person;
 CREATE TABLE IF NOT EXISTS user_profil (
     id SERIAL PRIMARY KEY,
     user_name VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password BYTEA NOT NULL
 );
+ALTER TABLE user_profil
+ALTER COLUMN password TYPE BYTEA;
 
-
+SELECT * FROM user_profil
+DROP TABLE IF EXISTS user_profil;
 INSERT INTO user_profil(user_name,password) VALUES 
 ('admin','admin'),
 ('user1','password1'),
