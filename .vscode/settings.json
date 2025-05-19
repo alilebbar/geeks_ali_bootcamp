@@ -79,6 +79,16 @@
             "database": "ecom",
             "username": "postgres",
             "password": "admin"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "books_review_api",
+            "database": "books_review_api",
+            "username": "postgres",
+            "password": "admin"
         }
     ]
 }
