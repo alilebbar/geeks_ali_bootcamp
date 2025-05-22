@@ -1,0 +1,29 @@
+<!doctype html> 
+<html lang="fr"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <title>Volume d'une sphère</title> 
+        <style>  
+            body {
+                padding-top:30px;
+            } 
+
+            label, input {
+                display: block;
+            }  
+        </style> 
+        <script src="ex4.js" defer></script>
+    </head> 
+    <body> 
+        <p>Entrez la valeur du rayon pour obtenir le volume d'une sphère.</p> 
+        <form id="MyForm"> 
+            <label for="radius">Rayon</label>
+            <input type="text" name="radius" id="radius" required> 
+
+            <label for="volume">Volume</label>
+            <input type="text" name="volume" id="volume" disabled> 
+
+            <input type="submit" value="Calculer" id="submit">    
+        </form> 
+    </body> 
+</html> 
