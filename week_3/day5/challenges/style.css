@@ -1,0 +1,126 @@
+/* Fond du site */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #FF556B 0%, #FF5B7B 100%);
+    font-family: sans-serif;
+}
+
+/* Conteneur principal */
+#contenaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titre */
+#titre {
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Bloc principal d'entrée + liste */
+#listClearDev {
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+/* Zone input + bouton ADD */
+#inputBoutton {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+    background-color: white;
+    font-size: 1em;
+}
+
+#add {
+    border: none;
+    background: white;
+    color: #77b2f5;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Liste des tâches */
+#divList {
+    background-color: white;
+}
+
+#list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+#list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #657e7d;
+}
+
+/* Bouton X */
+.x {
+    background: red;
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    margin-right: 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+/* Texte barré */
+.cheked {
+    text-decoration: line-through;
+    color: red;
+}
+.noCheked {
+    text-decoration: none;
+    color: #657e7d;
+}
+
+/* Bouton Clear */
+#clearDiv {
+    text-align: right;
+    margin-top: 10px;
+}
+
+#clear {
+    border: none;
+    background: white;
+    color: red;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+/* Séparateur */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #77b2f5;
+    margin: 5px 0;
+}
