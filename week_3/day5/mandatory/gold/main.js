@@ -42,6 +42,11 @@ elements.forEach((e)=>{
         console.log(ev);
         let name = ev.currentTarget.dataset.sound
         playSoundName(name);
+        let el = document.querySelector(`[data-sound='${name}']`);
+        if (el) {
+        el.classList.add("active");
+        setTimeout(() => el.classList.remove("active"), 100);
+       }
     })
 
 })
@@ -49,6 +54,12 @@ elements.forEach((e)=>{
 
 document.addEventListener("keydown",(ev)=>{
        let code = ev.keyCode
+       let name = soundsNUM[code];
        console.log(code);
        playSoundName(soundsNUM[code]);
+       let el = document.querySelector(`[data-sound='${name}']`);
+       if (el) {
+       el.classList.add("active");
+       setTimeout(() => el.classList.remove("active"), 100);
+      }
     })
