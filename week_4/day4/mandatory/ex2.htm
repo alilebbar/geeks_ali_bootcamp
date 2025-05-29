@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <form id="myform" name="my"
+            action="http://127.0.0.1:5500/week_4/day4/mandatory/ex2.htm"
+            method="POST">
+            <label for="username">Username</label>
+            <input type="text" name="username">
+            <label for="text">text</label>
+            <textarea type="textaria" name="text"></textarea>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
+<!--Avec la méthode POST, les données ne s’affichent pas dans l’URL,
+ mais sont envoyées dans le corps (body) de la requête. 
+Pour les voir, tu dois inspecter la requête dans l’onglet Réseau du navigateur.-->
