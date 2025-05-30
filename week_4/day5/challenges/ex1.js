@@ -11,4 +11,4 @@ let anagramme = (char1="",char2="")=>{
    }
    return true
 }
-console.log(anagramme("Astronomer","Moon starer"))
+console.log(anagramme("Astronomer","Moon starer")) 
