@@ -1,0 +1,100 @@
+@import url('https://fonts.cdnfonts.com/css/sega-logo-font');
+body{
+    min-height: 200vh;
+    display: flex;
+    gap: 30px ;
+    flex-direction: column;
+    align-items: center;
+
+    background: url('./resource/img/circuit-pattern.png'),#6556CD;
+}
+
+#barreRecherche{
+    width: 101%;
+    min-height: 14vh;
+    display: flex;
+    justify-self: start;
+    align-items:start ;
+    gap: 100px;
+    background: url('./resource/img/circuit-pattern.png'),#6ADF82;
+    background-repeat: repeat-x;
+    
+}
+input{
+    margin-top: 28px;
+    width: 30%;
+    min-height: 5px;
+    padding: 5px;
+
+}
+h1{
+    font-family: 'SEGA LOGO FONT', sans-serif;
+    padding-left: 40px;
+    font-size: xx-large;
+    color: #334355;
+    font-weight: 550;
+}
+#affichageRobot{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 45px;
+    width: 100%;
+}
+.card{
+    background : url("./resource/img/card-pattern.png"),#4FC1C5;
+    min-height: 30px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10%;
+}
+img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #303952;
+    margin: 5px;
+}
+h2{
+    padding: 6px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+h3{
+         padding: 6px;
+         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.card {
+    width: 300px;
+    height: 350px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.card h2, .card h3 {
+    text-align: center;
+    word-break: break-word;
+    white-space: normal;
+    width: 90%;
+    overflow-wrap: break-word;
+    font-size: 1.1em;
+    max-height: 3.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media screen and (max-width: 700px) {
+    #barreRecherche {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+    }
+    input {
+        margin-bottom: 30px;
+        width: 80%;
+    }
+    
+}
