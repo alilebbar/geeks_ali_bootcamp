@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js" defer></script>
+        <title>Quots</title>
+    </head>
+    <body>
+        <h1>Affichage</h1>
+        <div id="partieAffichage">
+            <section id="affichage">
+            </section>
+            <div id="btnforQuote"></div>
+            <button id="btnGenerer">Generer Une Citation</button>
+        </div>
+        <h1>Ajouter</h1>
+        <div>
+            <form id="formAjouter">
+                <label for="citation">Citation : </label><input type="text" name="citation" id="citation">
+                <label for="auteur">Auteur : </label><input type="text" name="auteur" id="auteur">
+                <button id="btnAjouter">Ajouter</button>
+            </form>
+        </div>
+        <h1>Filtrer</h1>
+        <div>
+            <div>
+            <section id="afficherFiltre"></section>
+            <div id="suivantPrecedent"></div>
+            </div>   
+            <form id="formFiltre">
+                <label for="nomAuteur">Entrer le nom d'auteur : </label>
+                <input type="text" name="nomAuteur" id="inputFiltre">
+                <button id="btnFilter">Filtrer</button>
+            </form>
+        </div>
+        </body>
+    </html>
