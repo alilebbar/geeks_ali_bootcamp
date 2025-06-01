@@ -21,7 +21,10 @@ const checkWin = (player) => {
   );
 };
 const modeFacile = () => {
-    if (adjcent.filter(cell => !cell).length === 0) return; // match nul
+    if (adjcent.filter(cell => !cell).length === 0) {
+        alert("Match Null")
+        return
+    } // match nul
 
     let iC = Math.floor(Math.random() * 9);
     while (adjcent[iC]) {
@@ -49,7 +52,10 @@ function trouverCoupGagnantAvecCheck(symbole) {
 }
 
 const modeDifficile = () => {
-    if (adjcent.filter(cell => !cell).length === 0 || isWin) return; // match nul ou fin
+    if (adjcent.filter(cell => !cell).length === 0 || isWin){
+        alert("Match Null")
+        return
+    } ; // match nul ou fin
 
     // 1. Jouer pour gagner si possible
     let coup = trouverCoupGagnantAvecCheck(ordinateur);

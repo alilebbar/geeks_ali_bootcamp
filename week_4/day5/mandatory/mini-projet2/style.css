@@ -82,6 +82,8 @@ h3{
     margin-top: 100px;
     padding: 0;
     color:white;
+    text-overflow: hidden;
+    overflow: hidden;
 
 
     
