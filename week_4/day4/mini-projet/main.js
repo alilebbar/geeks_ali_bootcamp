@@ -166,12 +166,12 @@ function creeButtonsSwinper(long){
         
     })
     btnPrecedente.addEventListener("click",(e)=>{
-        if(count<0){
-            count=long
-            filtrer()
-        }else{
-            count--
-            filtrer()
+        if(count <= 0){
+            count = long - 1;
+            filtrer();
+        } else {
+            count--;
+            filtrer();
         }
         
     })
