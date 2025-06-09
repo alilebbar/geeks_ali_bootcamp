@@ -1,3 +1,4 @@
 test
 *.env
 week_2/day4/mandatory/exXP.py
+node_modules
