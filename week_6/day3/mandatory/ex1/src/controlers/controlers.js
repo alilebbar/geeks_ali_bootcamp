@@ -1,17 +1,22 @@
-const {tasks} = require("../data/tasks.js")
+const tasks = require("../data/tasks.json")
 
 const getTasks = (req,res)=>{
+    console.log(tasks)
     if(tasks.length<=0)return res.send("Aucune task n'existe !")
     res.json(tasks)
 }
 
-const getTask = (req,res)=>{
-    let id = Number(req.params.id)
-    if(tasks.length<=0)return res.send("Aucune task n'existe !")
-    let task = tasks.map(e=>e.id === id)
-    if(!task)return res.send("Id introuvable !")
-    res.send(task)
-}
+const getTask = (req, res) => {
+    let id = Number(req.params.id);
+    if (tasks.length <= 0) return res.send("Aucune tâche n'existe !");
+
+    let task = tasks.find(e => e.id === id); 
+
+    if (!task) return res.send("Id introuvable !");
+    
+    res.send(task);
+};
+
 
 const postTasks = (req,res)=>{
     let task = req.body.task
