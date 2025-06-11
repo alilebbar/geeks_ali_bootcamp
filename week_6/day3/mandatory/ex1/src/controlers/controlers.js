@@ -1,50 +1,69 @@
-const tasks = require("../data/tasks.json")
+const fs = require("fs");
+const path = require("path");
 
-const getTasks = (req,res)=>{
-    console.log(tasks)
-    if(tasks.length<=0)return res.send("Aucune task n'existe !")
-    res.json(tasks)
+const filePath = path.join(__dirname, "../data/tasks.json");
+
+function readTasks() {
+    const data = fs.readFileSync(filePath, "utf-8");
+    return JSON.parse(data);
 }
 
-const getTask = (req, res) => {
-    let id = Number(req.params.id);
-    if (tasks.length <= 0) return res.send("Aucune tâche n'existe !");
+function writeTasks(data) {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
+}
 
-    let task = tasks.find(e => e.id === id); 
-
-    if (!task) return res.send("Id introuvable !");
-    
-    res.send(task);
+const getTasks = (req, res) => {
+    const tasks = readTasks();
+    if (tasks.length === 0) return res.send("Aucune tâche n'existe !");
+    res.json(tasks);
 };
 
+const getTask = (req, res) => {
+    const id = Number(req.params.id);
+    const tasks = readTasks();
+    const task = tasks.find(t => t.id === id);
+    if (!task) return res.send("Id introuvable !");
+    res.json(task);
+};
 
-const postTasks = (req,res)=>{
-    let task = req.body.task
-    let data = {id : tasks.length,task : task}
-    tasks.push(data)
-    res.send("task ajouter avec succee !")
-}
+const postTasks = (req, res) => {
+    const { task } = req.body;
+    if (!task) return res.send("Veuillez fournir une tâche !");
+    const tasks = readTasks();
+    const newTask = {
+        id: tasks.length ? tasks[tasks.length - 1].id + 1 : 0,
+        task
+    };
+    tasks.push(newTask);
+    writeTasks(tasks);
+    res.send("Tâche ajoutée avec succès !");
+};
 
 const putTask = (req, res) => {
-    let id = Number(req.params.id);
-    let task = req.body.task;
-    let index = tasks.findIndex(e => e.id === id);
-    if (index !== -1) {
-        tasks[index].task = task;
-        res.send("task modifier avec succee !");
-    } else {
-        return res.send("id non trouver !");
-    }
-}
-const deleteTask = (req,res)=>{
-    let id = Number(req.params.id)
-    let index = tasks.findIndex(e=>e.id===id)
-    if(index!=-1){
-        tasks.splice(index,1)
-        res.send("task supprimer avec succee !")
+    const id = Number(req.params.id);
+    const { task } = req.body;
+    const tasks = readTasks();
+    const index = tasks.findIndex(t => t.id === id);
+    if (index === -1) return res.send("Id non trouvé !");
+    tasks[index].task = task;
+    writeTasks(tasks);
+    res.send("Tâche modifiée avec succès !");
+};
 
-    }else{
-       return res.send("id non trouver !")
-    }
-}
-module.exports={getTasks,getTask,postTasks,putTask,deleteTask}
+const deleteTask = (req, res) => {
+    const id = Number(req.params.id);
+    const tasks = readTasks();
+    const index = tasks.findIndex(t => t.id === id);
+    if (index === -1) return res.send("Id non trouvé !");
+    tasks.splice(index, 1);
+    writeTasks(tasks);
+    res.send("Tâche supprimée avec succès !");
+};
+
+module.exports = {
+    getTasks,
+    getTask,
+    postTasks,
+    putTask,
+    deleteTask
+};

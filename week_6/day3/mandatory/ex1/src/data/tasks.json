@@ -1,1 +1,14 @@
-[{"id":0,"task":"task1"}]
+[
+  {
+    "id": 0,
+    "task": "task1"
+  },
+  {
+    "id": 1,
+    "task": "task1.5"
+  },
+  {
+    "id": 2,
+    "task": "task1.6"
+  }
+]
