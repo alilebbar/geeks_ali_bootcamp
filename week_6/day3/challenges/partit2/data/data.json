@@ -1,0 +1,17 @@
+[
+  {
+    "id": 0,
+    "firstname": "ali",
+    "lastname": "lebbar",
+    "email": "ali@gmail.com",
+    "username": "alios",
+    "password": "$2b$10$q.hTckuWHZB8PuRXE5RwJ.W9TG6iJwKwTO7NlYbOlyxiPHxh7wfL6"
+  },
+  {
+    "id": 1,
+    "lastname": "lebbar",
+    "email": "lbr.abdelali@gmail.com",
+    "username": "lll",
+    "password": "$2b$10$Wju23Z1XsjPK76ah3IYirehVldfO43J16zdrCoiT7ZS5IUzMq1NTe"
+  }
+]
