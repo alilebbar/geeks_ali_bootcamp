@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+
+
+.ornagBg{
+    background-color: #F4511E;
+    width: 100% !important;
+    display: flex  !important;
+    justify-content: center   !important;
+    align-items: center !important;
+}
