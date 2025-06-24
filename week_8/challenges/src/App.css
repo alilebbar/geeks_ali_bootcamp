@@ -1,0 +1,25 @@
+/* App.css */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f0f2f5;
+  font-family: sans-serif;
+  padding: auto;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+.task-form,
+.task-filter,
+.task-list {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 1rem;
+}
