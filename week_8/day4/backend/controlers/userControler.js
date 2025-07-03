@@ -128,15 +128,14 @@ export const login = async (req, res) => {
       (err, token) => {
         if (err) return res.status(500).json({ message: err.message });
 
-        res
-          .cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-            maxAge: 3600000,
-          })
-          .status(200)
-          .json({ message: "Login successful", token,user });
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "strict",
+          maxAge: 3600000,
+        });
+
+        res.status(200).json({ message: "Login successful", user });
       }
     );
   } catch (error) {
@@ -153,7 +152,6 @@ export const verify = async (req, res) => {
     const { id } = jwt.verify(token, process.env.SECRET_JWT);
     const user = await User.findById(id).select("-password");
     if (!user) return res.status(404).json({ message: "user not found" });
-
     res.status(200).json({ user, message: "user verified successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -172,6 +170,16 @@ export const userToAdmin = async (req, res) => {
     if (!user) return res.status(404).json({ message: "user not found" });
 
     res.status(200).json({ message: "user upgraded to admin successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Déconnexion utilisateur
+// Supprime le token JWT en cookie
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("token").status(200).json({ message: "user logged out successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
