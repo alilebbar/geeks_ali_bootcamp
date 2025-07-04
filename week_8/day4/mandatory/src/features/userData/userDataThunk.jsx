@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+// ==================== AUTHENTICATION ====================
 
+// Login user
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, thunkApi) => {
@@ -15,7 +17,7 @@ export const loginUser = createAsyncThunk(
       });
       if (!response.ok) throw new Error(response.statusText);
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -23,6 +25,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// Logout user
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, thunkApi) => {
@@ -43,13 +46,14 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+// Register user
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (user, thunkApi) => {
     try {
       const { username, email, password } = user;
       const response = await fetch("http://localhost:3000/api/users/register", {
-        method: "Post",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -65,6 +69,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+// Verify user session
 export const verifyUser = createAsyncThunk(
   "auth/verifyUser",
   async (_, thunkApi) => {
@@ -78,13 +83,17 @@ export const verifyUser = createAsyncThunk(
       });
       if (!response.ok) throw new Error(response.statusText);
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
   }
 );
+
+// ==================== USER MANAGEMENT ====================
+
+// Get all users
 export const getAllUsers = createAsyncThunk(
   "auth/getAllUser",
   async (_, thunkApi) => {
@@ -103,75 +112,88 @@ export const getAllUsers = createAsyncThunk(
     }
   }
 );
+
+// Get single user by ID
 export const getUser = createAsyncThunk(
-    "auth/getUser",
-    async (id, thunkApi)=>{
-        try {
-            const response = await fetch(`http://localhost:3000/api/users/${id}`,{
-                method: "GET",
-                credentials: "include"
-            })
-            const data = await response.json()
-            console.log(data)
-            return data
-        } catch (error) {
-            return thunkApi.rejectWithValue(error.message)
-        }
+  "auth/getUser",
+  async (id, thunkApi) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
-)
+  }
+);
 
+// Delete user by ID
 export const deleteUser = createAsyncThunk(
-    "auth/deleteUser",
-    async (id, thunkApi) => {
-        try {
-            const response = await fetch(`http://localhost:3000/api/users/${id}`, {
-                method: "DELETE",
-                credentials: "include"
-            })
-            const data = await response.json()
-            return data
-        } catch (error) {
-            return thunkApi.rejectWithValue(error.message)
-        }
+  "auth/deleteUser",
+  async (id, thunkApi) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
-)
+  }
+);
 
+// Update user by ID
 export const updateUser = createAsyncThunk(
-    "auth/updateUser",
-    async (user, thunkApi) => {
-        try {
-            const { username, email, password } = user
-            const response = await fetch(`http://localhost:3000/api/users/${user._id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify({ username, email, password }),
-            })
-            const data = await response.json()
-            return data
-        } catch (error) {
-            return thunkApi.rejectWithValue(error.message)
+  "auth/updateUser",
+  async (user, thunkApi) => {
+    try {
+      const { username, email, password } = user;
+      const response = await fetch(
+        `http://localhost:3000/api/users/${user._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ username, email, password }),
         }
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
-)
+  }
+);
 
+// Upgrade user to admin
 export const upgradeToAdmin = createAsyncThunk(
-    "auth/upgradeToAdmin",
-    async (id, thunkApi) => {
-        try {
-            const response = await fetch(`http://localhost:3000/api/users/admin/${id}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            })
-            const data = await response.json()
-            return data
-        } catch (error) {
-            return thunkApi.rejectWithValue(error.message)
+  "auth/upgradeToAdmin",
+  async (id, thunkApi) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/users/admin/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
         }
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
-)
+  }
+);
+
+// ==================== END ====================
