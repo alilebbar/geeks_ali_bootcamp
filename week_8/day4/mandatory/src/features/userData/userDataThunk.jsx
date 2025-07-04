@@ -156,3 +156,22 @@ export const updateUser = createAsyncThunk(
         }
     }
 )
+
+export const upgradeToAdmin = createAsyncThunk(
+    "auth/upgradeToAdmin",
+    async (id, thunkApi) => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/users/admin/${id}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            })
+            const data = await response.json()
+            return data
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message)
+        }
+    }
+)

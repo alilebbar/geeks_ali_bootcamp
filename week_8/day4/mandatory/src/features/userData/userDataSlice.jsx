@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, logoutUser, registerUser, verifyUser, getAllUsers, getUser, deleteUser, updateUser } from "./userDataThunk";
+import { loginUser, logoutUser, registerUser, verifyUser, getAllUsers, getUser, deleteUser, updateUser, upgradeToAdmin } from "./userDataThunk";
 
 const initialState = {
   user: null, // contiendra les données utilisateur après succès
@@ -126,6 +126,20 @@ const userDataSlice = createSlice({
         (state.error = action.payload),
         (state.connected = false);
     });
+    builder.addCase(upgradeToAdmin.pending, (state) => {
+      (state.loading = true),
+        (state.error = null);
+    });
+    builder.addCase(upgradeToAdmin.fulfilled, (state, action) => {
+      (state.loading = false),
+        (state.message = action.payload.message),
+        (state.connected = false);
+    });
+    builder.addCase(upgradeToAdmin.rejected, (state, action) => {
+      (state.loading = false),
+        (state.error = action.payload),
+        (state.connected = false);
+    }); 
   },
 });
 export default userDataSlice.reducer;
