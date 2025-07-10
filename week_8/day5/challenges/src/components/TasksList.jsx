@@ -6,7 +6,7 @@ import {
   removeTask,
   editTask,
 } from "../features/tasksSlice";
-import { useState, useCallback } from "react";
+import { useState, useCallback, use, useEffect } from "react";
 
 const TasksList = ({ idCategory }) => {
   const tasks = useSelector(selectTasksByCategory(idCategory));
@@ -20,8 +20,12 @@ const TasksList = ({ idCategory }) => {
   const [viewForm, setViewForm] = useState({ show: false, addOrEdit: false });
   const [idTask, setIdTask] = useState(null);
 
+  useEffect(() => {
+    console.log(idTask);
+  }, [idTask]);
+
   const selectedTask = tasks.find((task) => task.id === idTask); // 👈 Nouvelle ligne
-  
+
   const showAddToogle = (e) => {
     e.preventDefault();
     setTaksForm({
@@ -84,10 +88,10 @@ const TasksList = ({ idCategory }) => {
       {idCategory ? (
         <>
           <button onClick={showAddToogle}>Add Task</button>
-          <button onClick={handleRemoveTask} disabled={!idTask}>
+          <button onClick={handleRemoveTask} disabled={idTask === null}>
             Remove Task
           </button>
-          <button onClick={showEditToogle} disabled={!idTask}>
+          <button onClick={showEditToogle} disabled={idTask === null}>
             Edit Task
           </button>
 
@@ -132,9 +136,7 @@ const TasksList = ({ idCategory }) => {
               >
                 {task.title}
                 <button
-                  onClick={() =>
-                    dispatch(toggleTaskComplete({ id: task.id }))
-                  }
+                  onClick={() => dispatch(toggleTaskComplete({ id: task.id }))}
                   style={{
                     cursor: "pointer",
                     backgroundColor: task.completed ? "green" : "#F9F9F9",
