@@ -1,5 +1,6 @@
-var getAction = function (role) {
-    var result;
+"use strict";
+const getAction = (role) => {
+    let result;
     switch (role) {
         case "admin":
             result = "Gérer les utilisateurs et les paramètres";

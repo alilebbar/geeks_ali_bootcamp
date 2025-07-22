@@ -1,5 +1,6 @@
-var testNumber = function (num) {
-    var result;
+"use strict";
+const testNumber = (num) => {
+    let result;
     if (num > 0) {
         result = "positive";
     }

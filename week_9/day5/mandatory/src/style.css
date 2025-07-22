@@ -1,0 +1,78 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f7f9fc;
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-app {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+input, textarea {
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#clearRecipesButton {
+  background-color: #e74c3c;
+  margin-top: 1rem;
+}
+
+#clearRecipesButton:hover {
+  background-color: #c0392b;
+}
+
+.recipe {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fafafa;
+  position: relative;
+}
+
+.recipe h2 {
+  margin-top: 0;
+}
+
+.favorite-btn {
+  background-color: #3498db;
+  margin-top: 1rem;
+}
+
+.favorite-btn:hover {
+  background-color: #2980b9;
+}

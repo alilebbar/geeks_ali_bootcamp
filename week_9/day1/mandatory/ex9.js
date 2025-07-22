@@ -1,6 +1,6 @@
-function greet(name) {
-    if (name === void 0) { name = "Guest"; }
-    return "Hello, ".concat(name, "!");
+"use strict";
+function greet(name = "Guest") {
+    return `Hello, ${name}!`;
 }
 console.log(greet());
 console.log(greet("Ali"));
