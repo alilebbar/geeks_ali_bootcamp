@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import type { RecipesResponse } from "../types/types";
 
-export const fetchData = createAsyncThunk(
+export const fetchData = createAsyncThunk<RecipesResponse,string>(
   'api/fetchData',
   async (url: string, thunkApi) => {
     try {

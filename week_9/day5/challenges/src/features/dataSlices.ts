@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../api/api";
-
+import type { RecipesResponse } from "../types/types";
 
 type DataState = {
-  data: any;
+  data: RecipesResponse | null;
   loading: boolean;
   error: string | null;
 };
 
 export const dataSlice = createSlice({
-  name: 'data',
+  name: "data",
   initialState: {
     data: null,
     loading: false,
