@@ -4,15 +4,19 @@ const bcrypt = require("bcrypt");
 const { generateTokens } = require("../fonctions/tokenGenerateur");
 require("dotenv").config();
 
-async function register(req, res) {
+async function register(req, res, next) {
   const { name, user_name, password } = req.body;
   if (!name || !user_name || !password) {
-    return res.status(400).json({ message: "Please provide all the fields" });
+    const error = new Error("un problème d'une de vos informations");
+    error.status = 400;
+    return next(error);
   }
   try {
     const userName = await User.findOne({ user_name });
     if (userName) {
-      return res.status(409).json({ message: "Username already exists" });
+      const error = new Error("le username existe déjà");
+      error.status = 409;
+      return next(error);
     }
     const user = new User({ name, user_name, password });
     await user.save();
@@ -22,58 +26,73 @@ async function register(req, res) {
       user: userWithoutPassword,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error registering user" });
+    next(error);
   }
 }
 
-async function login(req, res) {
+async function login(req, res, next) {
   const { user_name, password } = req.body;
   try {
     const user = await User.findOne({ user_name });
-    if (user) {
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (isMatch) {
-        const { accessToken, refreshToken } = generateTokens(user);
-        res
-          .cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "Strict",
-          })
-          .cookie("accessToken", accessToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "Strict",
-          })
-          .json({ message: "Login successful" });
-      } else {
-        res.status(401).json({ message: "Invalid username or password" });
-      }
-    } else {
-      res.status(404).json({ message: "User not found" });
+    if (!user) {
+      const error = new Error("l'utilisateur n'existe pas");
+      error.status = 404;
+      return next(error);
     }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      const error = new Error(
+        "le nom d'utilisateur ou le mot de passe est incorrect"
+      );
+      error.status = 401;
+      return next(error);
+    }
+
+    const { accessToken, refreshToken } = generateTokens(user);
+    res
+      .cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      })
+      .cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      })
+      .json({ message: "Login successful" });
   } catch (error) {
-    res.status(500).json({ message: "Error logging in user" });
+    next(error);
   }
 }
 
-async function refresh(req, res) {
+async function refresh(req, res, next) {
   const token = req.cookies.refreshToken;
-  if (!token) return res.status(401).json({ message: "No refresh token" });
+  if (!token) {
+    const error = new Error("pas de token de rafraichissement");
+    error.status = 401;
+    return next(error);
+  }
 
   jwt.verify(token, process.env.REFRESH_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: "Invalid refresh token" });
+    if (err) {
+      const error = new Error("le token de rafraichissement est invalide");
+      error.status = 403;
+      return next(error);
+    }
     const accessToken = jwt.sign(
       { user_name: user.user_name },
       process.env.SECRET_KEY,
       { expiresIn: "15m" }
     );
-    res.status(200).cookie("accessToken", accessToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-    });
+    res
+      .status(200)
+      .cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      })
+      .json({ message: "Nouveau accessToken généré" });
   });
 }
 

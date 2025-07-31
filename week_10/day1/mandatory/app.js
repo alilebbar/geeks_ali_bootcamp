@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const connectDB = require('./data/config');
 const router = require('./rootes/authRootes')
+const {errorHandler} = require('./midlewares/errorHandler');
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 app.use('/auth',router)
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
