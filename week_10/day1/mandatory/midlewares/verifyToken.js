@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 async function verifyToken(req, res, next) {
-    const token = req.cookies.token;
+    const token = req.cookies.accessToken;
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }
